@@ -3,6 +3,20 @@
     <div class="col s8 offset-s2">
       <div class="card-panel">
   
+        <!-- Pokemon picture -->
+        <div *ngIf="isAddForm" class="form-group">
+          <label for="picture">Picture</label>
+          <input type="url" class="form-control" id="picture"
+                  required
+                 [(ngModel)]="pokemon.picture" name="picture"
+                 #picture="ngModel">
+  
+          <div [hidden]="picture.valid || picture.pristine"
+                class="card-panel red accent-1">
+                L'image du pokemon est requise.
+          </div>
+        </div>
+
         <!-- Pokemon name -->
         <div class="form-group">
           <label for="name">Nom</label>
@@ -36,10 +50,11 @@
         <div class="form-group">
           <label for="cp">Dégâts</label>
           <input type="number" class="form-control" id="cp"
-                  required
-                  pattern="^[0-9]{1,2}$"
-                 [(ngModel)]="pokemon.cp" name="cp"
-                 #cp="ngModel">
+                required
+                pattern="^[0-9]{1,2}$"
+                [(ngModel)]="pokemon.cp" 
+                name="cp"
+                #cp="ngModel">
            <div [hidden]="cp.valid || cp.pristine"
                  class="card-panel red accent-1">
                  Les dégâts du pokémon sont compris entre 0 et 99.
@@ -66,9 +81,11 @@
             </label>
           </p>
         </form>
-  
+
         <!-- Submit button -->
+        
         <div class="divider"></div>
+
         <div class="section center">
           <button type="submit"
             class="waves-effect waves-light btn"
